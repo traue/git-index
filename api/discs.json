@@ -1,9 +1,9 @@
 {
-  "ativo": false,
+  "ativo": true,
   "regulares": {
     "diurno": {
       "segunda": {
-        "title": "2ª Manhã - ",
+        "title": "2ª Manhã - Aplicações OO",
         "link": "2022-1_segunda_manha"
       },
       "terca": {

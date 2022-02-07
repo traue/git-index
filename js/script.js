@@ -28,16 +28,18 @@ const pagesURL = "https://traue.github.io/";
     $.getJSON(apiURL, function(data){
         json = data;
         sistemaAtivo = json['ativo'];
-        bootbox.alert({
-            message: "Aguarde o início do semestre!",
-            size: 'large',
-            closeButton: false,
-            title: "Aguarde...",
-            centerVertical: true,
-            callback: function(result){ 
-                window.location.href = "https://github.com/traue/";
-            }
-        });
+        if(!sistemaAtivo) {
+            bootbox.alert({
+                message: "Aguarde o início do semestre!",
+                size: 'large',
+                closeButton: false,
+                title: "Aguarde...",
+                centerVertical: true,
+                callback: function(result){ 
+                    window.location.href = "https://github.com/traue/";
+                }
+            });
+        }
     });
     loadingPainel(false);
     var perfEntries = performance.getEntriesByType("navigation");
