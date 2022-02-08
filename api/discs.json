@@ -29,19 +29,19 @@
         "link": "2022-1-segunda_noite"
       },
       "terca": {
-        "title": "3ª Noite - ",
+        "title": "3ª Noite - Programação Visual",
         "link": "2022-1-terca_noite"
       },
       "quarta": {
-        "title": "4ª Noite - ",
+        "title": "4ª Noite - Desenvolvimento de Apps",
         "link": "2022-1-quarta_noite"
       },
       "quinta": {
-        "title": "5ª Noite - ",
+        "title": "5ª Noite - Análise e Proj. de Sis. OO",
         "link": "2022-1-quinta_noite"
       },
       "sexta": {
-        "title": "6ª Noite - ",
+        "title": "6ª Noite - Aplicações OO",
         "link": "2022-1-sexta_noite"
       }
     }
@@ -53,12 +53,12 @@
         "link": "2022-1-projetos/segunda-manha-t44"
       },
       "terca": {
-        "title": "3ª Manha - Proj. Apps Multiplataforma (T38)",
+        "title": "3ª Manhã - Proj. Apps Multiplataforma (T38)",
         "link": "2022-1-projetos/terca-manha-t38"
       },
       "quinta": {
-        "title": "5ª Manhã - Proj. ",
-        "link": "2022-1-projetos/quarta-manha-t"
+        "title": "5ª Manhã - Proj. de Desenv. de Sistemas (T6)",
+        "link": "2022-1-projetos/quarta-manha-t6"
       }
     },
     "noturno": {
@@ -67,20 +67,16 @@
         "link": "2022-1-projetos/segunda-noite-t29"
       },
       "terca": {
-        "title": "3ª Noite - Proj. ",
-        "link": "2022-1-projetos/terca-noite-t"
+        "title": "3ª Noite - Proj. Prát. de Programação (T20)",
+        "link": "2022-1-projetos/terca-noite-t20"
       },
       "quarta":{
-        "title": "4ª Noite - Proj. ",
-        "link": "2022-1-projetos/quarta-noite-t"
+        "title": "4ª Noite - Proj. Sis. Inteligentes (T35)",
+        "link": "2022-1-projetos/quarta-noite-t35"
       },
       "quinta": {
-        "title": "5ª Noite - Proj. ",
-        "link": "2022-1-projetos/quinta-noite-t"
-      },
-      "sexta": {
-        "title": "6ª Noite - Proj. ",
-        "link": "2022-1-projetos/sexta-noite-t"
+        "title": "5ª e 6ª Noite - Proj. Apps Multip. (T37)",
+        "link": "2022-1-projetos/quinta-noite-t37"
       }
     }
   }
