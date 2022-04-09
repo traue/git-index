@@ -1,7 +1,8 @@
 body {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 237, 250)), to(#c5acf3)) fixed;
+    /* background: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 237, 250)), to(#c5acf3)) fixed; */
     margin-bottom: 30px;
-    background: url("../img/backimg.png") no-repeat center center fixed;
+    /* background: url("../img/backimg.png") no-repeat center center fixed; */
+    background-color: #313131;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -13,10 +14,29 @@ html {
   min-height: 100%;
 }
 
+h3 {
+  color: rgb(210, 210, 210);
+  font-family: monospace;
+}
+
+hr {
+  color: green;
+}
+
 #loader {
     display: none;
     position: fixed;
     width: 100%;
+}
+
+.logo {
+  color: lightgreen;
+}
+
+.pgtitle {
+  color: rgb(210, 210, 210);
+  font-family: monospace;
+  padding-left: 20px;
 }
 
 .loaderImg {
@@ -25,10 +45,10 @@ html {
 }
 
 select {
-  width: 90%;
+  width: 93%;
   padding: 5px 35px 5px 5px;
   font-size: 18px;
-  border: 2px solid rgb(60, 123, 123);
+  border: 2px solid rgb(160, 0, 0);
   border-radius: 0.5em;
   height: 44px;
   -webkit-appearance: none;
@@ -50,12 +70,12 @@ select {
 }
 
 select:disabled {
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(130, 130, 130);
   background: rgb(172, 172, 172);
 }
 
 select:hover {
-  border: 2px solid rgb(133, 0, 133);
+  border: 2px solid rgb(255, 255, 255);
 }
 
 select::-ms-expand {
@@ -78,7 +98,7 @@ select::-ms-expand {
     transform:translate(-50%,-50%);
     width:100%;
     height:15px;
-    background:#f78df7;
+    background:#fff79c;
     overflow:hidden;
   }
 
@@ -88,7 +108,7 @@ select::-ms-expand {
     top:0px;
     left:0px;
     bottom:0px;
-    background:#162453;
+    background:#616161;
     animation:box-1 2100ms cubic-bezier(0.65,0.81,0.73,0.4) infinite;
   }
 
@@ -98,7 +118,7 @@ select::-ms-expand {
     top:0px;
     left:0px;
     bottom:0px;
-    background:#6187ee;
+    background: lightgreen;
     animation:box-2 2100ms cubic-bezier(0.16,0.84,0.44,1) infinite;
     animation-delay:1150ms;
   }
