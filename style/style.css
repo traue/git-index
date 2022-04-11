@@ -2,7 +2,7 @@ body {
     /* background: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 237, 250)), to(#c5acf3)) fixed; */
     margin-bottom: 30px;
     /* background: url("../img/backimg.png") no-repeat center center fixed; */
-    background-color: #313131;
+    background-color: rgb(34,39,45);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
