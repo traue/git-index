@@ -1,8 +1,8 @@
 body {
-    /* background: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 237, 250)), to(#c5acf3)) fixed; */
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 237, 250)), to(#a07ce7)) fixed; 
     margin-bottom: 30px;
     /* background: url("../img/backimg.png") no-repeat center center fixed; */
-    background-color: rgb(34,39,45);
+    /* background-color: rgb(34,39,45); */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -15,7 +15,8 @@ html {
 }
 
 h3 {
-  color: rgb(210, 210, 210);
+  /* color: rgb(210, 210, 210); */
+  color: rgb(0, 0, 0);
   font-family: monospace;
 }
 
@@ -30,11 +31,11 @@ hr {
 }
 
 .logo {
-  color: lightgreen;
+  color: rgb(255, 0, 251);
 }
 
 .pgtitle {
-  color: rgb(210, 210, 210);
+  color: rgb(0, 0, 0);
   font-family: monospace;
   padding-left: 20px;
 }
