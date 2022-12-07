@@ -41,7 +41,18 @@ const pagesURL = "https://traue.github.io/";
             });
         }
     })
-    .fail(function() { alert("error"); });
+    .fail(function() {
+        bootbox.alert({
+            message: "Ops... Houve algum erro no carregamento da API.😓<br> Contate o profesor! ",
+            size: 'large',
+            closeButton: false,
+            title: "Ops... Erro na API!",
+            centerVertical: true,
+            callback: function(result){ 
+                window.location.href = "https://github.com/traue/";
+            }
+        });
+    });
 
     loadingPainel(false);
     var perfEntries = performance.getEntriesByType("navigation");
