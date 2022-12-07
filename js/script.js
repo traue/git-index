@@ -40,7 +40,9 @@ const pagesURL = "https://traue.github.io/";
                 }
             });
         }
-    });
+    })
+    .fail(function() { alert("error"); });
+
     loadingPainel(false);
     var perfEntries = performance.getEntriesByType("navigation");
     if (perfEntries[0].type === "back_forward") {
