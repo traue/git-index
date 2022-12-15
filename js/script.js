@@ -10,6 +10,7 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
+document.getElementById("year").innerHTML = new Date().getFullYear();
 
 /**
  * Prepara os selects no carregamento da página
