@@ -1,4 +1,4 @@
-# Uninove-2021-2
+# Uninove Git Index - Prof. Traue
 
 Repositório de suporte (indexador) para Uninove, do Prof. Traue
 
