@@ -10,7 +10,7 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-
+let version = '2.1.1';
 
 /**
  * Prepara os selects no carregamento da página
@@ -19,6 +19,7 @@ const pagesURL = 'https://traue.github.io/';
     loader = document.getElementById('loader');
     loadingPainel(true);
     document.getElementById("year").innerHTML = new Date().getFullYear();
+    document.getElementById("version").innerHTML = version;
     selectDiscTipo = document.getElementById('discTipo');
     selectDisciplinas = document.getElementById('disciplinas');
     selectTurno = document.getElementById('turno');
