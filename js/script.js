@@ -10,7 +10,17 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-let version = '2.1.1';
+let version = '2.1.2';
+
+window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted || 
+                           ( typeof window.performance != "undefined" && 
+                                window.performance.navigation.type === 2 );
+    if ( historyTraversal ) {
+      // Handle page restore.
+      window.location.reload();
+    }
+  });
 
 /**
  * Prepara os selects no carregamento da página
@@ -55,11 +65,11 @@ let version = '2.1.1';
     });
 
     loadingPainel(false);
-    var perfEntries = performance.getEntriesByType('navigation');
-    if (perfEntries[0].type === 'back_forward') {
-        location.reload();
-        //loadDiscs();
-    }
+    // var perfEntries = performance.getEntriesByType('navigation');
+    // if (perfEntries[0].type === 'back_forward') {
+    //     location.reload();
+    //     //loadDiscs();
+    // }
 });
 
 /**
