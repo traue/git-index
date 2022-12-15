@@ -55,7 +55,7 @@ const pagesURL = 'https://traue.github.io/';
     var perfEntries = performance.getEntriesByType('navigation');
     if (perfEntries[0].type === 'back_forward') {
         location.reload();
-        loadDiscs();
+        //loadDiscs();
     }
 });
 
@@ -117,8 +117,6 @@ function loadDiscs() {
         return;
     } else {
         removeOptions(selectDisciplinas);
-        selectDiscTipo.selectedIndex = 0;
-        //selectDiscTipo.disabled = true;
         var optAux = document.createElement('option');
         optAux.text = 'Selecione a disciplina';
         optAux.value = '';
@@ -130,7 +128,7 @@ function loadDiscs() {
             option.value = json[tipoDisciplina][turno][disc]['link'];
             selectDisciplinas.appendChild(option);
         }
-        //selectDisciplinas.disabled = false;
+        selectDisciplinas.disabled = false;
     }
 }
 
