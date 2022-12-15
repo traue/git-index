@@ -94,6 +94,7 @@ function turnoSelect() {
         selectDiscTipo.selectedIndex = 0;
     }
     selectDiscTipo.disabled = (turno == 'diurno' || turno == 'noturno') ? false : true;
+    selectDisciplinas.disabled = selectDiscTipo.disabled;
     loadDiscs();
 }
 
@@ -113,7 +114,7 @@ function discTipoSelect() {
  */
 function loadDiscs() {
     if(turno == null || tipoDisciplina == null) {
-        selectDisciplinas.disabled = selectDiscTipo.disabled = true;
+        selectDisciplinas.disabled = true;
         return;
     } else {
         removeOptions(selectDisciplinas);
@@ -128,7 +129,6 @@ function loadDiscs() {
             option.value = json[tipoDisciplina][turno][disc]['link'];
             selectDisciplinas.appendChild(option);
         }
-
         selectDisciplinas.disabled = false;
     }
 }

@@ -1,5 +1,5 @@
 body {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgb(206, 206, 206)), to(#ff00a2d9)) fixed; 
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(206, 206, 206)), to(#041930d9)) fixed; 
     margin-bottom: 30px;
     /* background: url("../img/backimg.png") no-repeat center center fixed; */
     /* background-color: rgb(34,39,45); */
@@ -99,7 +99,7 @@ select::-ms-expand {
     transform:translate(-50%,-50%);
     width:100%;
     height:15px;
-    background:#fff79c;
+    background:#0d00ff;
     overflow:hidden;
   }
 
