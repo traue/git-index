@@ -14,12 +14,12 @@ const pagesURL = 'https://traue.github.io/';
 let version = '2.2.1';
 
 window.addEventListener("pageshow", function ( event ) {
-    painel.style.display = 'none';
     var historyTraversal = event.persisted || 
                            (typeof window.performance != "undefined" && 
                            performance.getEntriesByType("navigation")[0].type === 2 );
     if (historyTraversal) {
       window.location.reload();
+      painel.style.display = 'none';
     }
   });
 
