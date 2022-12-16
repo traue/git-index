@@ -6,18 +6,19 @@ let selectDiscTipo = null;
 let selectDisciplinas = null;
 let selectTurno = null;
 let loader = null;
+let painel = null;
 let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-let version = '2.1.3';
+let version = '2.2.1';
 
-window.addEventListener( "pageshow", function ( event ) {
+window.addEventListener("pageshow", function ( event ) {
+    painel.style.display = 'none';
     var historyTraversal = event.persisted || 
-                           ( typeof window.performance != "undefined" && 
-                                window.performance.navigation.type === 2 );
-    if ( historyTraversal ) {
-      // Handle page restore.
+                           (typeof window.performance != "undefined" && 
+                           performance.getEntriesByType("navigation")[0].type === 2 );
+    if (historyTraversal) {
       window.location.reload();
     }
   });
@@ -27,6 +28,8 @@ window.addEventListener( "pageshow", function ( event ) {
  */ 
  $(window).on('pageshow', function(){
     loader = document.getElementById('loader');
+    painel =  document.getElementById('painel');
+    painel.visible = false;
     loadingPainel(true);
     document.getElementById("year").innerHTML = new Date().getFullYear();
     document.getElementById("version").innerHTML = version;
@@ -39,6 +42,7 @@ window.addEventListener( "pageshow", function ( event ) {
         json = data;
         sistemaAtivo = json['ativo'];
         if(!sistemaAtivo) {
+            painel.style.display = 'none';
             bootbox.alert({
                 message: 'Aguarde instruções do professor!<br><br>Esta aplicação não está ativa! 😄',
                 size: 'large',
@@ -52,6 +56,7 @@ window.addEventListener( "pageshow", function ( event ) {
         }
     })
     .fail(function() {
+        painel.style.display = 'none';
         bootbox.alert({
             message: 'Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ',
             size: 'large',
