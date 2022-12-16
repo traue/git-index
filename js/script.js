@@ -11,7 +11,7 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-let version = '2.2.1';
+let version = '2.2.3';
 
 window.addEventListener("pageshow", function ( event ) {
     var historyTraversal = event.persisted || 
