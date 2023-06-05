@@ -1,12 +1,12 @@
 body {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgb(206, 206, 206)), to(#041930d9)) fixed; 
-    margin-bottom: 30px;
-    /* background: url("../img/backimg.png") no-repeat center center fixed; */
-    /* background-color: rgb(34,39,45); */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(206, 206, 206)), to(#041930d9)) fixed;
+  margin-bottom: 30px;
+  /* background: url("../img/backimg.png") no-repeat center center fixed; */
+  /* background-color: rgb(34,39,45); */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 html {
@@ -25,9 +25,9 @@ hr {
 }
 
 #loader {
-    display: none;
-    position: fixed;
-    width: 100%;
+  display: none;
+  position: fixed;
+  width: 100%;
 }
 
 .logo {
@@ -41,8 +41,8 @@ hr {
 }
 
 .loaderImg {
-    width: 100%;
-    height: 30px;
+  width: 100%;
+  height: 30px;
 }
 
 select {
@@ -80,77 +80,82 @@ select:hover {
 }
 
 select::-ms-expand {
-    display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+  display: none;
+  /* Remove default arrow in Internet Explorer 10 and 11 */
 }
 
 /* Target Internet Explorer 9 to undo the custom arrow */
 @media screen and (min-width:0\0) {
-    select {
-        background: none\9;
-        padding: 5px\9;
-    }
+  select {
+    background: none\9;
+    padding: 5px\9;
+  }
 }
 
 /* Progress bar, from https://codepen.io/inertia/pen/oeQKXW*/
 .bar {
-    position:fixed;
-    top:0%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:100%;
-    height:15px;
-    background:#8b85ff;
-    overflow:hidden;
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 15px;
+  background: #8b85ff;
+  overflow: hidden;
+}
+
+.bar div:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  background: #616161;
+  animation: box-1 2100ms cubic-bezier(0.65, 0.81, 0.73, 0.4) infinite;
+}
+
+.bar div:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  background: lightgreen;
+  animation: box-2 2100ms cubic-bezier(0.16, 0.84, 0.44, 1) infinite;
+  animation-delay: 1150ms;
+}
+
+@keyframes box-1 {
+  0% {
+    left: -35%;
+    right: 100%;
   }
 
-  .bar div:before {
-    content:"";
-    position:absolute;
-    top:0px;
-    left:0px;
-    bottom:0px;
-    background:#616161;
-    animation:box-1 2100ms cubic-bezier(0.65,0.81,0.73,0.4) infinite;
+  60%,
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes box-2 {
+  0% {
+    left: -200%;
+    right: 100%;
   }
 
-  .bar div:after {
-    content:"";
-    position:absolute;
-    top:0px;
-    left:0px;
-    bottom:0px;
-    background: lightgreen;
-    animation:box-2 2100ms cubic-bezier(0.16,0.84,0.44,1) infinite;
-    animation-delay:1150ms;
+  60%,
+  100% {
+    left: 107%;
+    right: -8%;
   }
-
-  @keyframes box-1 {
-    0% {
-      left:-35%;
-      right:100%;
-    }
-    60%,100% {
-      left:100%;
-      right:-90%;
-    }
-  }
-  
-  @keyframes box-2 {
-    0% {
-      left:-200%;
-      right:100%;
-    }
-    60%,100% {
-      left:107%;
-      right:-8%;
-    }
-  }
+}
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 30px; 
-    line-height: 30px;
-    --background-color: rgb(228, 22, 217);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  --background-color: rgb(228, 22, 217);
 }
