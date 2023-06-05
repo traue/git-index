@@ -67,4 +67,4 @@ function purecookieDismiss() {
     pureFadeOut("cookieConsentContainer");
 }
 
-window.onload = function () { cookieConsent(); };
+window.onload = function () { cookieConsent();};
