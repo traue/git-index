@@ -28,6 +28,13 @@ html {
   min-height: 100%;
 }
 
+.blured {
+  margin-left: .1em;
+  backdrop-filter: blur(3em);
+  height: 10em;
+  /* background-color: rgba(0,0,0,0.1); */
+}
+
 h3 {
   /* color: rgb(210, 210, 210); */
   color: rgb(0, 0, 0);

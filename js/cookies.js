@@ -1,8 +1,8 @@
 // --- Config --- //
-var purecookieTitle = "Este site utiliza cookies."; // Title
-var purecookieDesc = "Usamos cookies para garantir a vocÃª a melhor experiÃªncia no nosso site."; // Description
-var purecookieLink = '<br>'; // Cookiepolicy link
-var purecookieButton = "Estou ciente"; // Button text
+var purecookieTitle = "Este site utiliza cookies."; 
+var purecookieDesc = "Usamos cookies para garantir a você a melhor experiência.";
+var purecookieLink = '<br>';
+var purecookieButton = "Ciente";
 // ---        --- //
 
 
