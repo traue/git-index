@@ -11,24 +11,23 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-let version = '2.2.3';
+let version = '2.3.0';
 
-window.addEventListener("pageshow", function ( event ) {
-    var historyTraversal = event.persisted || 
-                           (typeof window.performance != "undefined" && 
-                           performance.getEntriesByType("navigation")[0].type === 2 );
+window.addEventListener("pageshow", function (event) {
+    var historyTraversal = event.persisted ||
+        (typeof window.performance != "undefined" && performance.getEntriesByType("navigation")[0].type === 2);
     if (historyTraversal) {
-      window.location.reload();
-      painel.style.display = 'none';
+        window.location.reload();
+        painel.style.display = 'none';
     }
-  });
+});
 
 /**
  * Prepara os selects no carregamento da página
- */ 
- $(window).on('pageshow', function(){
+ */
+$(window).on('pageshow', function () {
     loader = document.getElementById('loader');
-    painel =  document.getElementById('painel');
+    painel = document.getElementById('painel');
     painel.visible = false;
     loadingPainel(true);
     document.getElementById("year").innerHTML = new Date().getFullYear();
@@ -38,10 +37,10 @@ window.addEventListener("pageshow", function ( event ) {
     selectTurno = document.getElementById('turno');
     selectDiscTipo.selectedIndex = selectDisciplinas.selectedIndex = selectTurno.selectedIndex = 0;
     selectDiscTipo.disabled = selectDisciplinas.disabled = true;
-    $.getJSON(apiURL, function(data){
+    $.getJSON(apiURL, function (data) {
         json = data;
         sistemaAtivo = json['ativo'];
-        if(!sistemaAtivo) {
+        if (!sistemaAtivo) {
             painel.style.display = 'none';
             bootbox.alert({
                 message: 'Aguarde instruções do professor!<br><br>Esta aplicação não está ativa! 😄',
@@ -49,32 +48,27 @@ window.addEventListener("pageshow", function ( event ) {
                 closeButton: false,
                 title: 'Aguarde...',
                 centerVertical: true,
-                callback: function(result){ 
+                callback: function (result) {
                     window.location.href = 'https://github.com/traue/';
                 }
             });
         }
     })
-    .fail(function() {
-        painel.style.display = 'none';
-        bootbox.alert({
-            message: 'Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ',
-            size: 'large',
-            closeButton: false,
-            title: 'Ops... Erro na API!',
-            centerVertical: true,
-            callback: function(result){ 
-                window.location.href = 'https://github.com/traue/';
-            }
+        .fail(function () {
+            painel.style.display = 'none';
+            bootbox.alert({
+                message: 'Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ',
+                size: 'large',
+                closeButton: false,
+                title: 'Ops... Erro na API!',
+                centerVertical: true,
+                callback: function (result) {
+                    window.location.href = 'https://github.com/traue/';
+                }
+            });
         });
-    });
 
     loadingPainel(false);
-    // var perfEntries = performance.getEntriesByType('navigation');
-    // if (perfEntries[0].type === 'back_forward') {
-    //     location.reload();
-    //     //loadDiscs();
-    // }
 });
 
 /**
@@ -82,7 +76,7 @@ window.addEventListener("pageshow", function ( event ) {
  */
 function removeOptions(selectElement) {
     var i, L = selectElement.options.length - 1;
-    for(i = L; i >= 0; i--) {
+    for (i = L; i >= 0; i--) {
         selectElement.remove(i);
     }
 }
@@ -92,18 +86,18 @@ function removeOptions(selectElement) {
  * @param {boolean} loading 
  */
 function loadingPainel(loading) {
-    if(loading) {
+    if (loading) {
         loader.style.display = 'block';
     } else {
-        setTimeout(function(){
+        setTimeout(function () {
             loader.style.display = 'none';
-        },1000);
+        }, 1000);
     }
 }
 
 /**
  * Controla o select de turno 
- */ 
+ */
 function turnoSelect() {
     turno = selectTurno.value;
     if (turno == '') {
@@ -130,7 +124,7 @@ function discTipoSelect() {
  * Carrega a lista de disciplinas no select
  */
 function loadDiscs() {
-    if(turno == null || tipoDisciplina == null) {
+    if (turno == null || tipoDisciplina == null) {
         selectDisciplinas.disabled = true;
         return;
     } else {
@@ -139,8 +133,8 @@ function loadDiscs() {
         optAux.text = 'Selecione a disciplina';
         optAux.value = '';
         selectDisciplinas.appendChild(optAux);
-        
-        for(var disc in json[tipoDisciplina][turno]) {
+
+        for (var disc in json[tipoDisciplina][turno]) {
             var option = document.createElement('option');
             option.text = json[tipoDisciplina][turno][disc]['title'];
             option.value = json[tipoDisciplina][turno][disc]['link'];
