@@ -11,7 +11,7 @@ let json = null;
 const apiURL = 'https://api.traue.com.br/disciplinas/';
 const gitURL = 'https://github.com/traue/';
 const pagesURL = 'https://traue.github.io/';
-let version = '2.3.0';
+let version = '2.3.1';
 
 window.addEventListener("pageshow", function (event) {
     var historyTraversal = event.persisted ||
@@ -53,6 +53,7 @@ $(window).on('pageshow', function () {
                 }
             });
         }
+        loadingPainel(false);
     })
         .fail(function () {
             painel.style.display = 'none';
@@ -68,7 +69,7 @@ $(window).on('pageshow', function () {
             });
         });
 
-    loadingPainel(false);
+    
 });
 
 /**
