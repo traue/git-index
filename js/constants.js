@@ -14,6 +14,8 @@ var constants = {
     nightShift: "🌒 Noturno",
     diurnalParam: "diurno",
     nightParam: "noturno",
+    dlc: "ead",
+    dlcTitle: "🖥️ EaD",
     disciplineSelectTitle: "2. Selecione a disciplina",
     select: "Selecione...",
     ops: "🟡 Ops...",

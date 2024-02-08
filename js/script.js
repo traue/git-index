@@ -40,28 +40,40 @@ function startModalChoose() {
       centerVertical: true,
       message: constants.shiftQuestion,
       closeButton: false,
-      buttons: {
-        diurno: {
-          label: constants.diurnal,
-          className: "btn-info",
-          callback: function () {
-            modalDisciplineChoose(constants.diurnalParam);
-          },
-        },
-        noturno: {
-          label: constants.nightShift,
-          className: "btn-primary",
-          callback: function () {
-            modalDisciplineChoose(constants.nightParam);
-          },
-        },
-      },
+      buttons: getShiftButtons()
     })
     .find(".modal-content")
     .css({
       "background-color": constants.modalBackColor,
       color: constants.modalFontColor,
     });
+}
+
+function getShiftButtons() {
+  //ToDo: make this listing dynamic
+  return {
+    dayShift: {
+      label: constants.diurnal,
+      className: "btn-info",
+      callback: function () {
+        modalDisciplineChoose(constants.diurnalParam);
+      },
+    },
+    nightShift: {
+      label: constants.nightShift,
+      className: "btn-primary",
+      callback: function () {
+        modalDisciplineChoose(constants.nightParam);
+      },
+    },
+    dlcShift: {
+      label: constants.dlcTitle,
+        className: "dlcButton",
+        callback: function () {
+          modalDisciplineChoose(constants.dlc);
+        },
+    }
+  };
 }
 
 function modalDisciplineChoose(shift) {
