@@ -1,168 +1,126 @@
 //vars
-let sistemaAtivo = true;
-let turno = null;
-let tipoDisciplina = null
-let selectDiscTipo = null;
-let selectDisciplinas = null;
-let selectTurno = null;
+let systemActive = true;
 let loader = null;
 let painel = null;
 let json = null;
-const apiURL = 'https://api.traue.com.br/disciplinas/';
-const gitURL = 'https://github.com/traue/';
-const pagesURL = 'https://traue.github.io/';
-let version = '2.3.1';
+const apiURL = "https://api.traue.com.br/disciplinas/";
+const gitURL = "https://github.com/traue/";
+const pagesURL = "https://traue.github.io/";
+let version = "3.0.0";
 
-window.addEventListener("pageshow", function (event) {
-    var historyTraversal = event.persisted ||
-        (typeof window.performance != "undefined" && performance.getEntriesByType("navigation")[0].type === 2);
-    if (historyTraversal) {
-        window.location.reload();
-        painel.style.display = 'none';
+$(window).on("pageshow", function () {
+  $.getJSON(apiURL, function (data) {
+    json = data;
+    systemActive = json["active"];
+    if (!systemActive) {
+      bootbox.alert({
+        message:
+          "Aguarde instruções do professor!<br><br>Esta aplicação não está ativa! 😄",
+        size: "large",
+        closeButton: false,
+        title: "Aguarde...",
+        centerVertical: true,
+        callback: function (result) {
+          window.location.href = "https://github.com/traue/";
+        },
+      });
+      return;
     }
+
+    startModalChoose();
+  }).fail(function () {
+    bootbox.alert({
+      message:
+        "Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ",
+      size: "large",
+      closeButton: false,
+      title: "Ops... Erro na API!",
+      centerVertical: true,
+      callback: function (result) {
+        window.location.href = "https://github.com/traue/";
+      },
+    });
+  });
 });
 
-/**
- * Prepara os selects no carregamento da página
- */
-$(window).on('pageshow', function () {
-    loader = document.getElementById('loader');
-    painel = document.getElementById('painel');
-    painel.visible = false;
-    loadingPainel(true);
-    document.getElementById("year").innerHTML = new Date().getFullYear();
-    document.getElementById("version").innerHTML = version;
-    selectDiscTipo = document.getElementById('discTipo');
-    selectDisciplinas = document.getElementById('disciplinas');
-    selectTurno = document.getElementById('turno');
-    selectDiscTipo.selectedIndex = selectDisciplinas.selectedIndex = selectTurno.selectedIndex = 0;
-    selectDiscTipo.disabled = selectDisciplinas.disabled = true;
-    $.getJSON(apiURL, function (data) {
-        json = data;
-        sistemaAtivo = json['ativo'];
-        if (!sistemaAtivo) {
-            painel.style.display = 'none';
-            bootbox.alert({
-                message: 'Aguarde instruções do professor!<br><br>Esta aplicação não está ativa! 😄',
-                size: 'large',
-                closeButton: false,
-                title: 'Aguarde...',
-                centerVertical: true,
-                callback: function (result) {
-                    window.location.href = 'https://github.com/traue/';
-                }
-            });
-        }
-        loadingPainel(false);
-    })
-        .fail(function () {
-            painel.style.display = 'none';
-            bootbox.alert({
-                message: 'Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ',
-                size: 'large',
-                closeButton: false,
-                title: 'Ops... Erro na API!',
-                centerVertical: true,
-                callback: function (result) {
-                    window.location.href = 'https://github.com/traue/';
-                }
-            });
-        });
+function startModalChoose() {
+  bootbox.dialog({
+    title: "1. Turno",
+    centerVertical: true,
+    message: "Em qual turno você estuda?",
+    closeButton: false,
+    buttons: {
+      diurno: {
+        label: "☀️ Diurno",
+        className: "btn-info",
+        callback: function () {
+          modalDisciplineChoose("diurno");
+        },
+      },
+      noturno: {
+        label: "🌒 Noturno",
+        className: "btn-primary",
+        callback: function () {
+          modalDisciplineChoose("noturno");
+        },
+      },
+    },
+  }).find('.modal-content').css({'background-color': '#303030', 'color': 'white'});;
+}
 
-    
-});
+function modalDisciplineChoose(shift) {
+  let options = getDisciplines(json["regulares"][shift]);
 
-/**
- * Limpa um select
- */
-function removeOptions(selectElement) {
-    var i, L = selectElement.options.length - 1;
-    for (i = L; i >= 0; i--) {
-        selectElement.remove(i);
-    }
+  bootbox.prompt({
+    title: "2. Selecione a disciplina",
+    centerVertical: true,
+    closeButton: false,
+    inputType: "select",
+    inputOptions: options,
+    callback: function (result) {
+      if (result != null) {
+        redirectToGit(result);
+      } else {
+        startModalChoose();
+      }
+    },
+  }).find('.modal-content').css({'background-color': '#303030', 'color': 'white'});;
+}
+
+function getDisciplines(shift) {
+  let options = [];
+  options.push({ text: "Selecione...", value: "" });
+  for (let value in shift) {
+    options.push({
+      text: shift[value]["description"],
+      value: shift[value]["link"],
+    });
+  }
+  return options;
+}
+
+function redirectToGit(link) {
+  link != "" && link != null
+    ? window.location.href = gitURL + link
+    : bootbox.alert({
+        message: "É preciso selecionar uma disciplina!",
+        size: "large",
+        closeButton: false,
+        title: "🟡 Ops...",
+        centerVertical: true,
+      });
 }
 
 /**
  * Mostra ou oculta a progress bar
- * @param {boolean} loading 
+ * @param {boolean} loading
  */
 function loadingPainel(loading) {
-    if (loading) {
-        loader.style.display = 'block';
-    } else {
-        setTimeout(function () {
-            loader.style.display = 'none';
-        }, 1000);
-    }
-}
-
-/**
- * Controla o select de turno 
- */
-function turnoSelect() {
-    turno = selectTurno.value;
-    if (turno == '') {
-        turno = null;
-        tipoDisciplina = null;
-        selectDiscTipo.selectedIndex = 0;
-    }
-    selectDiscTipo.disabled = (turno == 'diurno' || turno == 'noturno') ? false : true;
-    loadDiscs();
-}
-
-/**
- * Controla o select de tipo de disciplina
- */
-function discTipoSelect() {
-    tipoDisciplina = document.getElementById('discTipo').value;
-    if (tipoDisciplina == '') {
-        tipoDisciplina = null;
-    }
-    loadDiscs();
-}
-
-/**
- * Carrega a lista de disciplinas no select
- */
-function loadDiscs() {
-    if (turno == null || tipoDisciplina == null) {
-        selectDisciplinas.disabled = true;
-        return;
-    } else {
-        removeOptions(selectDisciplinas);
-        var optAux = document.createElement('option');
-        optAux.text = 'Selecione a disciplina';
-        optAux.value = '';
-        selectDisciplinas.appendChild(optAux);
-
-        for (var disc in json[tipoDisciplina][turno]) {
-            var option = document.createElement('option');
-            option.text = json[tipoDisciplina][turno][disc]['title'];
-            option.value = json[tipoDisciplina][turno][disc]['link'];
-            selectDisciplinas.appendChild(option);
-        }
-        selectDisciplinas.disabled = false;
-    }
-}
-
-/**
- * Redireciona para o repo da disciplina
- */
-function discSelect() {
-    loadingPainel(true);
-
-    var link = document.getElementById('disciplinas').value;
-    (link != '')
-        ? window.location.href = (tipoDisciplina == 'projetos')
-            ? pagesURL + link
-            : gitURL + link
-        : bootbox.alert({
-            message: 'É preciso selecionar uma disciplina!',
-            size: 'large',
-            closeButton: false,
-            title: '🟡 Ops...',
-            centerVertical: true
-        });
-
-    loadingPainel(false);
+  if (loading) {
+    //loader.style.display = 'block';
+  } else {
+    setTimeout(function () {
+      //loader.style.display = 'none';
+    }, 1000);
+  }
 }
