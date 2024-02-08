@@ -1,27 +1,18 @@
-//vars
-let systemActive = true;
-let loader = null;
-let painel = null;
-let json = null;
-const apiURL = "https://api.traue.com.br/disciplinas/";
-const gitURL = "https://github.com/traue/";
-const pagesURL = "https://traue.github.io/";
-let version = "3.0.0";
-
 $(window).on("pageshow", function () {
-  $.getJSON(apiURL, function (data) {
+  document.getElementById("year").innerHTML = new Date().getFullYear();
+  document.getElementById("version").innerHTML = constants.version;
+  $.getJSON(constants.apiURL, function (data) {
     json = data;
     systemActive = json["active"];
     if (!systemActive) {
       bootbox.alert({
-        message:
-          "Aguarde instruções do professor!<br><br>Esta aplicação não está ativa! 😄",
-        size: "large",
+        message: constants.waitInstructions,
+        size: constants.boxSize,
         closeButton: false,
-        title: "Aguarde...",
+        title: constants.wait,
         centerVertical: true,
         callback: function (result) {
-          window.location.href = "https://github.com/traue/";
+          window.location.href = constants.gitURL;
         },
       });
       return;
@@ -30,66 +21,76 @@ $(window).on("pageshow", function () {
     startModalChoose();
   }).fail(function () {
     bootbox.alert({
-      message:
-        "Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o profesor! ",
-      size: "large",
+      message: constants.apiError,
+      size: constants.boxSize,
       closeButton: false,
-      title: "Ops... Erro na API!",
+      title: constants.apiErrorTitle,
       centerVertical: true,
       callback: function (result) {
-        window.location.href = "https://github.com/traue/";
+        window.location.href = constants.gitURL;
       },
     });
   });
 });
 
 function startModalChoose() {
-  bootbox.dialog({
-    title: "1. Turno",
-    centerVertical: true,
-    message: "Em qual turno você estuda?",
-    closeButton: false,
-    buttons: {
-      diurno: {
-        label: "☀️ Diurno",
-        className: "btn-info",
-        callback: function () {
-          modalDisciplineChoose("diurno");
+  bootbox
+    .dialog({
+      title: constants.dayShiftTitle,
+      centerVertical: true,
+      message: constants.shiftQuestion,
+      closeButton: false,
+      buttons: {
+        diurno: {
+          label: constants.diurnal,
+          className: "btn-info",
+          callback: function () {
+            modalDisciplineChoose(constants.diurnalParam);
+          },
+        },
+        noturno: {
+          label: constants.nightShift,
+          className: "btn-primary",
+          callback: function () {
+            modalDisciplineChoose(constants.nightParam);
+          },
         },
       },
-      noturno: {
-        label: "🌒 Noturno",
-        className: "btn-primary",
-        callback: function () {
-          modalDisciplineChoose("noturno");
-        },
-      },
-    },
-  }).find('.modal-content').css({'background-color': '#303030', 'color': 'white'});;
+    })
+    .find(".modal-content")
+    .css({
+      "background-color": constants.modalBackColor,
+      color: constants.modalFontColor,
+    });
 }
 
 function modalDisciplineChoose(shift) {
-  let options = getDisciplines(json["regulares"][shift]);
-
-  bootbox.prompt({
-    title: "2. Selecione a disciplina",
-    centerVertical: true,
-    closeButton: false,
-    inputType: "select",
-    inputOptions: options,
-    callback: function (result) {
-      if (result != null) {
-        redirectToGit(result);
-      } else {
-        startModalChoose();
-      }
-    },
-  }).find('.modal-content').css({'background-color': '#303030', 'color': 'white'});;
+  options = getDisciplines(json["regulares"][shift]);
+  bootbox
+    .prompt({
+      title: constants.disciplineSelectTitle,
+      centerVertical: true,
+      closeButton: false,
+      inputType: "select",
+      inputOptions: options,
+      callback: function (result) {
+        if (result != null) {
+          redirectToGit(result);
+        } else {
+          startModalChoose();
+        }
+      },
+    })
+    .find(".modal-content")
+    .css({
+      "background-color": constants.modalBackColor,
+      color: constants.modalFontColor,
+    });
 }
 
 function getDisciplines(shift) {
   let options = [];
-  options.push({ text: "Selecione...", value: "" });
+  options.push({ text: constants.select, value: "" });
   for (let value in shift) {
     options.push({
       text: shift[value]["description"],
@@ -101,26 +102,34 @@ function getDisciplines(shift) {
 
 function redirectToGit(link) {
   link != "" && link != null
-    ? window.location.href = gitURL + link
-    : bootbox.alert({
-        message: "É preciso selecionar uma disciplina!",
-        size: "large",
-        closeButton: false,
-        title: "🟡 Ops...",
-        centerVertical: true,
-      });
+    ? (window.location.href = constants.gitURL + link)
+    : bootbox
+        .alert({
+          title: constants.ops,
+          message: constants.shouldSelectDiscipline,
+          closeButton: false,
+          centerVertical: true,
+          callback: function (result) {
+            startModalChoose();
+          },
+        })
+        .find(".modal-content")
+        .css({
+          "background-color": constants.modalBackColor,
+          color: constants.modalFontColor,
+        });
 }
 
-/**
- * Mostra ou oculta a progress bar
- * @param {boolean} loading
- */
-function loadingPainel(loading) {
-  if (loading) {
-    //loader.style.display = 'block';
-  } else {
-    setTimeout(function () {
-      //loader.style.display = 'none';
-    }, 1000);
-  }
-}
+// /**
+//  * Mostra ou oculta a progress bar (toDO)
+//  * @param {boolean} loading
+//  */
+// function loadingPainel(loading) {
+//   if (loading) {
+//     //loader.style.display = 'block';
+//   } else {
+//     setTimeout(function () {
+//       //loader.style.display = 'none';
+//     }, 1000);
+//   }
+// }

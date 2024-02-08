@@ -1,17 +1,18 @@
-body,
-html {
+body, html {
   height: 100%;
-}
-
-.bg {
-  /* The image used */
   background-image: url("../img/backmack.jpeg");
-
-  /* Full height */
   height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(146, 20, 20);
+  color: white;
+  text-align: center;
 }
