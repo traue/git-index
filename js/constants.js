@@ -6,7 +6,7 @@ var constants = {
     boxSize: "large",
     waitInstructions: "Aguarde instruções do professor!<br><br>Esta aplicação não está ativa ainda! 😄",
     wait: "Aguarde...",
-    apiError: "Ops... Houve algum erro no carregamento da API.😓<br><br>Contate o professor! ",
+    apiError: "Ops... Houve algum erro na API.😓<br><br>Já estou resolvento! Em breve tudo voltará ao notmal.🤓",
     apiErrorTitle: "🔴 Ops... Erro na API!",
     dayShiftTitle: "1. Turno",
     shiftQuestion: "Em qual turno você estuda?",
