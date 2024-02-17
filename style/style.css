@@ -1,10 +1,15 @@
-body, html {
+body,
+html {
   height: 100%;
   background-image: url("../img/backmack.jpeg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  justify-content: center;
+  align-items: center;
+
 }
 
 .footer {
@@ -17,6 +22,17 @@ body, html {
   text-align: center;
 }
 
-.dlcButton, dlcButton:hover {
+.dlcButton,
+dlcButton:hover {
   background: orange !important;
+}
+
+img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100px;
 }
