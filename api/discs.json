@@ -4,7 +4,7 @@
     "diurno": [
       {
         "dia": "2ª e 6ª",
-        "description": "2ª e 6ª manhã - Lab. de Eng. de Software",
+        "description": "2ª e 6ª manhã - Lab. de Eng. de Software II",
         "link": "2024.1-labengsoft"
       },
       {
@@ -19,6 +19,20 @@
         "description": "5ª Noite - Estrutura de Dados II",
         "link": "2024.1-estruturadedados2"
       }
+    ],
+    "ead": [
+        {
+            "description": "Desenvolvimento de Sistemas I (ADS 02A/B)",
+            "link": "2024.1-desenvolvimentosSistemasI"
+        },
+        {
+            "description": "Desenvolvimento de Sistemas II (ADS 03A/B)",
+            "link": "2024.1-desenvolvSistemasII"
+        },
+        {
+            "description": "Teste de Software (ADS 05A)",
+            "link": "2024.1-TesteSoftware"
+        }
     ]
   }
 }
