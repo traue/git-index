@@ -1,5 +1,6 @@
 //text translations
-var constants = navigator.language == "pt" ? constants_pt : constants_en;
+var constants = constants_pt; //
+//navigator.language == "pt" ? constants_pt : constants_en; under review
 
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
