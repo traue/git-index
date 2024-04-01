@@ -1,5 +1,6 @@
-$.getScript('constants_pt.js', function() {
+$.getScript('js/constants_pt.js', function() {
   alert('Load was performed.');
+  
 });
 
 
