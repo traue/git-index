@@ -2,6 +2,7 @@ var configs = {
     apiURL : "https://api.traue.com.br/disciplinas/",
     gitURL : "https://github.com/traue/",
     pagesURL : "https://traue.github.io/",
+    regularDiscipline: "regulares",
     diurnalParam: "diurno",
     nightParam: "noturno",
     dlc: "ead",

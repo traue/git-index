@@ -1,6 +1,5 @@
 //text translations
-var constants = constants_pt; //
-//navigator.language == "pt" ? constants_pt : constants_en; under review
+var constants = navigator.language.includes("pt") ? constants_pt : constants_en; //under review
 
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
@@ -91,7 +90,7 @@ function getShiftButtons() {
 
 function modalDisciplineChoose(shift) {
   showLoadingAnimation(false);
-  options = getDisciplines(json["regulares"][shift]);
+  options = getDisciplines(json[configs.regularDiscipline][shift]);
   bootbox
     .prompt({
       title: constants.disciplineSelectTitle,
