@@ -1,9 +1,3 @@
-$.getScript('js/constants_pt.js', function() {
-  alert('Load was performed.');
-  
-});
-
-
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
   var historyTraversal =
@@ -12,7 +6,6 @@ $(window).on("pageshow", function (event) {
       window.performance.getEntriesByType("navigation")[0].type ===
         "back_forward");
   if (historyTraversal) {
-    // Handle page restore.
     window.location.reload();
   }
   document.getElementById("year").innerHTML = new Date().getFullYear();
