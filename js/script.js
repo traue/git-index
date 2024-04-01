@@ -127,7 +127,7 @@ function getDisciplines(shift) {
 }
 
 function redirectToGit(link) {
-  showLoadingAnimation(true);
+  showLoadingAnimation(link != "" && link != null);
   link != "" && link != null
     ? (window.location.href = configs.gitURL + link)
     : bootbox

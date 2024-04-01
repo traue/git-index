@@ -5,7 +5,7 @@ var configs = {
     diurnalParam: "diurno",
     nightParam: "noturno",
     dlc: "ead",
-    version: "3.2.0",
+    version: "3.2.1",
     boxSize: "large",
     modalBackColor: "#252525",
     modalFontColor: "white"
