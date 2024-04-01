@@ -1,3 +1,6 @@
+//text translations
+var constants = navigator.language == "pt" ? constants_pt : constants_en;
+
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
   var historyTraversal =
@@ -9,44 +12,40 @@ $(window).on("pageshow", function (event) {
     window.location.reload();
   }
   document.getElementById("year").innerHTML = new Date().getFullYear();
-  document.getElementById("version").innerHTML = constants.version;
-  $.getJSON(constants.apiURL, function (data) {
+  document.getElementById("version").innerHTML = configs.version;
+  $.getJSON(configs.apiURL, function (data) {
     json = data;
     systemActive = json["active"];
     if (!systemActive) {
       bootbox.alert({
         message: constants.waitInstructions,
-        size: constants.boxSize,
+        size: configs.boxSize,
         closeButton: false,
         title: constants.wait,
         centerVertical: true,
         callback: function (result) {
-          window.location.href = constants.gitURL;
+          window.location.href = configs.gitURL;
         },
       });
       return;
     }
-
     startModalChoose();
-
   }).fail(function () {
     bootbox.alert({
       message: constants.apiError,
-      size: constants.boxSize,
+      size: configs.boxSize,
       closeButton: false,
       title: constants.apiErrorTitle,
       centerVertical: true,
       callback: function (result) {
-        window.location.href = constants.gitURL;
+        window.location.href = configs.gitURL;
       },
     });
   });
 });
 
 function startModalChoose() {
-
   showLoadingAnimation(false);
-
   bootbox
     .dialog({
       title: constants.dayShiftTitle,
@@ -57,39 +56,40 @@ function startModalChoose() {
     })
     .find(".modal-content")
     .css({
-      "background-color": constants.modalBackColor,
-      color: constants.modalFontColor,
+      "background-color": configs.modalBackColor,
+      color: configs.modalFontColor,
     });
 }
 
 function getShiftButtons() {
-  //ToDo: make this listing dynamic
+  //ToDo: make this listing more dynamic
   return {
     dayShift: {
       label: constants.diurnal,
       className: "btn-info",
       callback: function () {
-        modalDisciplineChoose(constants.diurnalParam);
+        modalDisciplineChoose(configs.diurnalParam);
       },
     },
     nightShift: {
       label: constants.nightShift,
       className: "btn-primary",
       callback: function () {
-        modalDisciplineChoose(constants.nightParam);
+        modalDisciplineChoose(configs.nightParam);
       },
     },
     dlcShift: {
       label: constants.dlcTitle,
       className: "dlcButton",
       callback: function () {
-        modalDisciplineChoose(constants.dlc);
+        modalDisciplineChoose(configs.dlc);
       },
     },
   };
 }
 
 function modalDisciplineChoose(shift) {
+  showLoadingAnimation(false);
   options = getDisciplines(json["regulares"][shift]);
   bootbox
     .prompt({
@@ -108,8 +108,8 @@ function modalDisciplineChoose(shift) {
     })
     .find(".modal-content")
     .css({
-      "background-color": constants.modalBackColor,
-      color: constants.modalFontColor,
+      "background-color": configs.modalBackColor,
+      color: configs.modalFontColor,
     });
 }
 
@@ -128,7 +128,7 @@ function getDisciplines(shift) {
 function redirectToGit(link) {
   showLoadingAnimation(true);
   link != "" && link != null
-    ? (window.location.href = constants.gitURL + link)
+    ? (window.location.href = configs.gitURL + link)
     : bootbox
         .alert({
           title: constants.ops,
@@ -141,8 +141,8 @@ function redirectToGit(link) {
         })
         .find(".modal-content")
         .css({
-          "background-color": constants.modalBackColor,
-          color: constants.modalFontColor,
+          "background-color": configs.modalBackColor,
+          color: configs.modalFontColor,
         });
 }
 
