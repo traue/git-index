@@ -1,3 +1,8 @@
+$.getScript('constants_pt.js', function() {
+  alert('Load was performed.');
+});
+
+
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
   var historyTraversal =
@@ -29,7 +34,7 @@ $(window).on("pageshow", function (event) {
     }
 
     startModalChoose();
-    showLoadingAnimation(false);
+
   }).fail(function () {
     bootbox.alert({
       message: constants.apiError,
@@ -45,6 +50,9 @@ $(window).on("pageshow", function (event) {
 });
 
 function startModalChoose() {
+
+  showLoadingAnimation(false);
+
   bootbox
     .dialog({
       title: constants.dayShiftTitle,
