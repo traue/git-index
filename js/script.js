@@ -1,4 +1,14 @@
-$(window).on("pageshow", function () {
+$(window).on("pageshow", function (event) {
+  showLoadingAnimation(true);
+  var historyTraversal =
+    event.persisted ||
+    (typeof window.performance != "undefined" &&
+      window.performance.getEntriesByType("navigation")[0].type ===
+        "back_forward");
+  if (historyTraversal) {
+    // Handle page restore.
+    window.location.reload();
+  }
   document.getElementById("year").innerHTML = new Date().getFullYear();
   document.getElementById("version").innerHTML = constants.version;
   $.getJSON(constants.apiURL, function (data) {
@@ -19,6 +29,7 @@ $(window).on("pageshow", function () {
     }
 
     startModalChoose();
+    showLoadingAnimation(false);
   }).fail(function () {
     bootbox.alert({
       message: constants.apiError,
@@ -40,7 +51,7 @@ function startModalChoose() {
       centerVertical: true,
       message: constants.shiftQuestion,
       closeButton: false,
-      buttons: getShiftButtons()
+      buttons: getShiftButtons(),
     })
     .find(".modal-content")
     .css({
@@ -68,11 +79,11 @@ function getShiftButtons() {
     },
     dlcShift: {
       label: constants.dlcTitle,
-        className: "dlcButton",
-        callback: function () {
-          modalDisciplineChoose(constants.dlc);
-        },
-    }
+      className: "dlcButton",
+      callback: function () {
+        modalDisciplineChoose(constants.dlc);
+      },
+    },
   };
 }
 
@@ -113,6 +124,7 @@ function getDisciplines(shift) {
 }
 
 function redirectToGit(link) {
+  showLoadingAnimation(true);
   link != "" && link != null
     ? (window.location.href = constants.gitURL + link)
     : bootbox
@@ -132,16 +144,6 @@ function redirectToGit(link) {
         });
 }
 
-// /**
-//  * Mostra ou oculta a progress bar (toDO)
-//  * @param {boolean} loading
-//  */
-// function loadingPainel(loading) {
-//   if (loading) {
-//     //loader.style.display = 'block';
-//   } else {
-//     setTimeout(function () {
-//       //loader.style.display = 'none';
-//     }, 1000);
-//   }
-// }
+function showLoadingAnimation(loading) {
+  loading ? $("#loadingAnimation").fadeIn() : $("#loadingAnimation").fadeOut();
+}

@@ -6,10 +6,8 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
   justify-content: center;
   align-items: center;
-
 }
 
 .footer {
@@ -17,7 +15,7 @@ html {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(200, 30, 30);
+  background-color: rgb(140, 20, 20);
   color: white;
   text-align: center;
 }

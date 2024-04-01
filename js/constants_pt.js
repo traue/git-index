@@ -2,11 +2,11 @@ var constants = {
     apiURL : "https://api.traue.com.br/disciplinas/",
     gitURL : "https://github.com/traue/",
     pagesURL : "https://traue.github.io/",
-    version: "3.0.2",
+    version: "3.1.0",
     boxSize: "large",
     waitInstructions: "Aguarde instruções do professor!<br><br>Esta aplicação não está ativa ainda! 😄",
     wait: "Aguarde...",
-    apiError: "Ops... Houve algum erro na API.😓<br><br>Já estou resolvento! Em breve tudo voltará ao notmal.🤓",
+    apiError: "Ops... Houve algum erro na API.😓<br><br>Já estou resolvendo! Em breve tudo voltará ao normal.🤓",
     apiErrorTitle: "🔴 Ops... Erro na API!",
     dayShiftTitle: "1. Turno",
     shiftQuestion: "Em qual turno você estuda?",
@@ -20,6 +20,6 @@ var constants = {
     select: "Selecione...",
     ops: "🟡 Ops...",
     shouldSelectDiscipline: "É preciso selecionar uma disciplina!",
-    modalBackColor: "#303030",
+    modalBackColor: "#252525",
     modalFontColor: "white"
   };
