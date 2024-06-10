@@ -1,5 +1,5 @@
 constants_pt = {
-    waitInstructions: "Aguarde instruções do professor!<br><br>Esta aplicação não está ativa ainda! 😄",
+    waitInstructions: "Aguarde instruções do professor!<br><br>Esta aplicação não ainda não foi ativada! 😄",
     wait: "Aguarde...",
     apiError: "Ops... Houve algum erro na API.😓<br><br>Já estou resolvendo! Em breve tudo voltará ao normal.🤓",
     apiErrorTitle: "🔴 Ops... Erro na API!",
