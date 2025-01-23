@@ -15,15 +15,15 @@ constants_pt = {
   };
 
   constants_en = {
-    waitInstructions: "Wait for instructions from the teacher!<br><br>This application is not active yet! 😄",
+    waitInstructions: "Hold on! Wait for the professor instructions!<br><br>This application is not active yet! 😄",
     wait: "Wait...",
     apiError: "Ops... There was an error in the API.😓<br><br>I'm already solving it! Soon everything will return to normal.🤓",
     apiErrorTitle: "🔴 Ops... API error!",
     dayShiftTitle: "1. Shift ⌚️",
     shiftQuestion: "What shift do you study?",
-    diurnal: "☀️ Diurnal",
+    diurnal: "☀️ Morning",
     nightShift: "🌒 Night",
-    dlcTitle: "🖥️ DLC",
+    dlcTitle: "🖥️ DLC (Distance)",
     disciplineSelectTitle: "2. Select the discipline",
     select: "Select...",
     ops: "🟡 Ops...",
