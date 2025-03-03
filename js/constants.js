@@ -23,7 +23,7 @@ constants_pt = {
     shiftQuestion: "What shift do you study?",
     diurnal: "☀️ Morning",
     nightShift: "🌒 Night",
-    dlcTitle: "🖥️ DLC (Distance)",
+    dlcTitle: "🖥️ Online",
     disciplineSelectTitle: "2. Select the discipline",
     select: "Select...",
     ops: "🟡 Ops...",
