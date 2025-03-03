@@ -1,7 +1,7 @@
 body,
 html {
   height: 100%;
-  background-image: url("../assets/backmack.jpeg");
+  background-image: url("../assets/background.gif");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,7 +15,7 @@ html {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(140, 20, 20);
+  background-color: rgb(80, 35, 114);
   color: white;
   text-align: center;
 }

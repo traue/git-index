@@ -1,5 +1,5 @@
 var configs = {
-    version: "3.2.6",
+    version: "3.2.7",
     apiURL : "https://api.traue.com.br/disciplinas/",
     gitURL : "https://github.com/traue/",
     pagesURL : "https://traue.github.io/",

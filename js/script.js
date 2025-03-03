@@ -119,7 +119,7 @@ function getDisciplines(shift) {
   for (let value in shift) {
     options.push({
       text: shift[value]["description"],
-      value: shift[value]["link"],
+      value: shift[value]["link"]
     });
   }
   return options;
