@@ -2,36 +2,38 @@
   "active": true,
   "turnos": {
     "diurno": [
+      
       {
-        "nome": "Lab. de Eng. de Software II",
-        "dia": "2ª e 6ª manhã",
-        "repo": "2024.1-labengsoft"
-      },
-      {
-        "nome": "Lab. de Programação I",
-        "dia": "6ª manhã",
-        "repo": "2024.1-labprogramamacao"
+        "nome": "Computação Distribuída",
+        "dia": "6ª (manhã)",
+        "repo": "26.1_comp_dist"
       }
     ],
     "noturno": [
       {
-        "nome": "Estrutura de Dados II",
-        "dia": "5ª noite",
-        "repo": "2024.1-estruturadedados2"
+        "nome": "Laboratório de Eng. de Software",
+        "dia": "2ª e 3ª (noite)",
+        "repo": "26.1_lab_eng_sw"
+      },
+      {
+        "nome": "Desenvolvimento de Sistemas II",
+        "dia": "3ª (noite)",
+        "repo": "26.1_ds2"
+      },
+      {
+        "nome": "Desenvolvimento de Sistemas I",
+        "dia": "6ª (noite)",
+        "repo": "26.1_ds1"
       }
     ],
     "ead": [
       {
-        "nome": "Desenvolvimento de Sistemas I (ADS 02A/B)",
-        "repo": "2024.1-desenvolvimentosSistemasI"
+        "nome": "Programação de Sistemas I (ADS 02A/B)",
+        "repo": "26.1_ps1_ead"
       },
       {
         "nome": "Desenvolvimento de Sistemas II (ADS 03A/B)",
-        "repo": "2024.1-desenvolvSistemasII"
-      },
-      {
-        "nome": "Teste de Software (ADS 05A)",
-        "repo": "2024.1-TesteSoftware"
+        "repo": "26.1_ds2_ead"
       }
     ]
   }
