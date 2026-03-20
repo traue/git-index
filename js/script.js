@@ -56,7 +56,7 @@ document.addEventListener("click", function (e) {
 });
 
 function showDisciplines(shift) {
-  var disciplines = apiData[configs.regularDiscipline][shift];
+  var disciplines = apiData[configs.turnosKey][shift];
   var list = document.getElementById("discipline-list");
   list.innerHTML = "";
 
@@ -73,9 +73,21 @@ function showDisciplines(shift) {
     var disc = disciplines[i];
     var a = document.createElement("a");
     a.className = "discipline-item";
-    a.href = configs.gitURL + disc.link;
-    a.textContent = disc.description;
+    a.href = configs.gitURL + disc.repo;
     a.style.animationDelay = (i * 0.06) + "s";
+
+    if (disc.dia) {
+      var badge = document.createElement("span");
+      badge.className = "discipline-day";
+      badge.textContent = disc.dia;
+      a.appendChild(badge);
+    }
+
+    var nome = document.createElement("span");
+    nome.className = "discipline-name";
+    nome.textContent = disc.nome;
+    a.appendChild(nome);
+
     list.appendChild(a);
   }
 

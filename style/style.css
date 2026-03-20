@@ -263,19 +263,33 @@ html, body {
 }
 
 .discipline-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
   padding: 0.9rem 1.1rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   color: var(--text);
   font-family: var(--font);
-  font-size: 0.88rem;
-  line-height: 1.45;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s var(--ease);
   animation: slide-in 0.3s var(--ease) both;
+}
+
+.discipline-day {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.discipline-name {
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .discipline-item:hover {
