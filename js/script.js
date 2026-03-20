@@ -1,5 +1,6 @@
 //text translations
 var constants = navigator.language.includes("pt") ? constants_pt : constants_en; //under review
+var json = null;
 
 $(window).on("pageshow", function (event) {
   showLoadingAnimation(true);
@@ -15,7 +16,7 @@ $(window).on("pageshow", function (event) {
   document.getElementById("version").innerHTML = configs.version;
   $.getJSON(configs.apiURL, function (data) {
     json = data;
-    systemActive = json["active"];
+    var systemActive = json["active"];
     if (!systemActive) {
       bootbox.alert({
         message: constants.waitInstructions,
@@ -90,7 +91,7 @@ function getShiftButtons() {
 
 function modalDisciplineChoose(shift) {
   showLoadingAnimation(false);
-  options = getDisciplines(json[configs.regularDiscipline][shift]);
+  var options = getDisciplines(json[configs.regularDiscipline][shift]);
   bootbox
     .prompt({
       title: constants.disciplineSelectTitle,

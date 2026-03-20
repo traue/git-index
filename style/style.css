@@ -21,7 +21,7 @@ html {
 }
 
 .dlcButton,
-dlcButton:hover {
+.dlcButton:hover {
   background: orange !important;
 }
 
