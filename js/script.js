@@ -1,152 +1,83 @@
-//text translations
-var constants = navigator.language.includes("pt") ? constants_pt : constants_en; //under review
-var json = null;
+// Language detection
+var constants = navigator.language.includes("pt") ? constants_pt : constants_en;
+var apiData = null;
 
-$(window).on("pageshow", function (event) {
-  showLoadingAnimation(true);
-  var historyTraversal =
-    event.persisted ||
-    (typeof window.performance != "undefined" &&
-      window.performance.getEntriesByType("navigation")[0].type ===
-        "back_forward");
-  if (historyTraversal) {
-    window.location.reload();
-  }
-  document.getElementById("year").innerHTML = new Date().getFullYear();
-  document.getElementById("version").innerHTML = configs.version;
-  $.getJSON(configs.apiURL, function (data) {
-    json = data;
-    var systemActive = json["active"];
-    if (!systemActive) {
-      bootbox.alert({
-        message: constants.waitInstructions,
-        size: configs.boxSize,
-        closeButton: false,
-        title: constants.wait,
-        centerVertical: true,
-        callback: function (result) {
-          window.location.href = configs.gitURL;
-        },
-      });
-      return;
-    }
-    startModalChoose();
-  }).fail(function () {
-    bootbox.alert({
-      message: constants.apiError,
-      size: configs.boxSize,
-      closeButton: false,
-      title: constants.apiErrorTitle,
-      centerVertical: true,
-      callback: function (result) {
-        window.location.href = configs.gitURL;
-      },
-    });
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("version").textContent = configs.version;
+  loadAPI();
 });
 
-function startModalChoose() {
-  showLoadingAnimation(false);
-  bootbox
-    .dialog({
-      title: constants.dayShiftTitle,
-      centerVertical: true,
-      message: constants.shiftQuestion,
-      closeButton: false,
-      buttons: getShiftButtons(),
+// Reload on back/forward navigation to avoid stale state
+window.addEventListener("pageshow", function (e) {
+  if (e.persisted) window.location.reload();
+});
+
+function loadAPI() {
+  showState("state-loading");
+
+  fetch(configs.apiURL)
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
     })
-    .find(".modal-content")
-    .css({
-      "background-color": configs.modalBackColor,
-      color: configs.modalFontColor,
-    });
-}
-
-function getShiftButtons() {
-  //ToDo: make this listing more dynamic
-  return {
-    dayShift: {
-      label: constants.diurnal,
-      className: "btn-info",
-      callback: function () {
-        modalDisciplineChoose(configs.diurnalParam);
-      },
-    },
-    nightShift: {
-      label: constants.nightShift,
-      className: "btn-primary",
-      callback: function () {
-        modalDisciplineChoose(configs.nightParam);
-      },
-    },
-    dlcShift: {
-      label: constants.dlcTitle,
-      className: "dlcButton",
-      callback: function () {
-        modalDisciplineChoose(configs.dlc);
-      },
-    },
-  };
-}
-
-function modalDisciplineChoose(shift) {
-  showLoadingAnimation(false);
-  var options = getDisciplines(json[configs.regularDiscipline][shift]);
-  bootbox
-    .prompt({
-      title: constants.disciplineSelectTitle,
-      centerVertical: true,
-      closeButton: false,
-      inputType: "select",
-      inputOptions: options,
-      callback: function (result) {
-        if (result != null) {
-          redirectToGit(result);
-        } else {
-          startModalChoose();
-        }
-      },
+    .then(function (data) {
+      apiData = data;
+      if (!data.active) {
+        showState("state-inactive");
+        return;
+      }
+      showState("step-shift");
     })
-    .find(".modal-content")
-    .css({
-      "background-color": configs.modalBackColor,
-      color: configs.modalFontColor,
+    .catch(function () {
+      showState("state-error");
     });
 }
 
-function getDisciplines(shift) {
-  let options = [];
-  options.push({ text: constants.select, value: "" });
-  for (let value in shift) {
-    options.push({
-      text: shift[value]["description"],
-      value: shift[value]["link"]
-    });
+function showState(id) {
+  var states = document.querySelectorAll(".state");
+  for (var i = 0; i < states.length; i++) {
+    states[i].classList.remove("active");
   }
-  return options;
+  var el = document.getElementById(id);
+  if (el) el.classList.add("active");
 }
 
-function redirectToGit(link) {
-  showLoadingAnimation(link != "" && link != null);
-  link != "" && link != null
-    ? (window.location.href = configs.gitURL + link)
-    : bootbox
-        .alert({
-          title: constants.ops,
-          message: constants.shouldSelectDiscipline,
-          closeButton: false,
-          centerVertical: true,
-          callback: function (result) {
-            startModalChoose();
-          },
-        })
-        .find(".modal-content")
-        .css({
-          "background-color": configs.modalBackColor,
-          color: configs.modalFontColor,
-        });
-}
+// Shift selection
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest(".btn-shift");
+  if (!btn) return;
+  showDisciplines(btn.dataset.shift);
+});
 
-function showLoadingAnimation(loading) {
-  loading ? $("#loadingAnimation").fadeIn() : $("#loadingAnimation").fadeOut();
+// Back button
+document.addEventListener("click", function (e) {
+  if (e.target.id === "btn-back") showState("step-shift");
+});
+
+function showDisciplines(shift) {
+  var disciplines = apiData[configs.regularDiscipline][shift];
+  var list = document.getElementById("discipline-list");
+  list.innerHTML = "";
+
+  if (!disciplines || disciplines.length === 0) {
+    var p = document.createElement("p");
+    p.className = "state-text";
+    p.textContent = "Nenhuma disciplina encontrada.";
+    list.appendChild(p);
+    showState("step-disciplines");
+    return;
+  }
+
+  for (var i = 0; i < disciplines.length; i++) {
+    var disc = disciplines[i];
+    var a = document.createElement("a");
+    a.className = "discipline-item";
+    a.href = configs.gitURL + disc.link;
+    a.textContent = disc.description;
+    a.style.animationDelay = (i * 0.06) + "s";
+    list.appendChild(a);
+  }
+
+  showState("step-disciplines");
 }

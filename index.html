@@ -1,40 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="assets/favicon.ico" />
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/cf577b44fc.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"
-    integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script type="text/javascript" src="js/configs.js"></script>
   <script type="text/javascript" src="js/constants.js"></script>
-  <script type="text/javascript" src="js/script.js"></script>
   <link rel="stylesheet" href="style/style.css" />
-  <title>Git - Prof. Traue</title>
+  <title>Disciplinas - Prof. Traue</title>
 </head>
 
 <body>
-  <div id="loadingAnimation">
-    <img src="assets/loading.gif" />
-  </div>
-  <footer class="footer">
-    <div class="container">
-      <span class="text text-white">© <span id="year"></span> - Prof. Traue - v.<span id="version"></span></span>
+  <div class="backdrop"></div>
+
+  <main class="main">
+    <div class="card glass">
+
+      <!-- Loading -->
+      <div id="state-loading" class="state active">
+        <div class="spinner"></div>
+        <p class="state-text">Carregando...</p>
+      </div>
+
+      <!-- API error -->
+      <div id="state-error" class="state">
+        <div class="state-icon">😓</div>
+        <h2 class="state-title">Ops...</h2>
+        <p class="state-text">Houve um erro ao carregar as disciplinas.<br>Tente novamente em instantes.</p>
+        <button class="btn-accent" onclick="window.location.reload()">Tentar novamente</button>
+      </div>
+
+      <!-- Inactive -->
+      <div id="state-inactive" class="state">
+        <div class="state-icon">📚</div>
+        <h2 class="state-title">Aguarde</h2>
+        <p class="state-text">Aguarde instruções do professor!<br>Esta aplicação ainda não foi ativada.</p>
+      </div>
+
+      <!-- Step 1: Shift -->
+      <div id="step-shift" class="state">
+        <div class="card-header">
+          <h1 class="card-title">Disciplinas</h1>
+          <p class="card-subtitle">Prof. Thiago Traue</p>
+        </div>
+        <div class="divider"></div>
+        <p class="step-label">Selecione o turno</p>
+        <div class="shift-grid">
+          <button class="btn-shift" data-shift="diurno">
+            <span class="shift-icon">☀️</span>
+            <span class="shift-name">Diurno</span>
+          </button>
+          <button class="btn-shift" data-shift="noturno">
+            <span class="shift-icon">🌙</span>
+            <span class="shift-name">Noturno</span>
+          </button>
+          <button class="btn-shift btn-shift--wide" data-shift="ead">
+            <span class="shift-icon">🖥️</span>
+            <span class="shift-name">EaD</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Disciplines -->
+      <div id="step-disciplines" class="state">
+        <button id="btn-back" class="btn-back" aria-label="Voltar">← Voltar</button>
+        <p class="step-label">Selecione a disciplina</p>
+        <div id="discipline-list" class="discipline-list"></div>
+      </div>
+
     </div>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Prof. Traue · v.<span id="version"></span> · <a href="https://github.com/traue/git-index" target="_blank" rel="noopener noreferrer">GitHub</a></span>
   </footer>
+
+  <script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>
