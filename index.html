@@ -7,79 +7,80 @@
   <link rel="shortcut icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script type="text/javascript" src="js/configs.js"></script>
-  <script type="text/javascript" src="js/constants.js"></script>
-  <link rel="stylesheet" href="style/style.css" />
-  <title>Disciplinas - Prof. Traue</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style/style.css?v=4.0.0" />
+  <script type="text/javascript" src="js/configs.js?v=4.0.0"></script>
+  <title>GitIndex — Prof. Thiago G. Traue</title>
 </head>
 
-<body>
-  <div class="backdrop"></div>
+<body data-density="normal">
 
-  <main class="main">
-    <div class="card glass">
+  <div class="shell">
 
-      <!-- Loading -->
-      <div id="state-loading" class="state active">
-        <div class="spinner"></div>
-        <p class="state-text">Carregando...</p>
+    <div class="masthead">
+      <div class="brand serif">Git<em>Index</em></div>
+      <div class="meta">
+        <span id="status-chip"><span class="dot"></span>em dia</span>
+        <span class="hide-mob" id="semester-chip">Semestre 26.1</span>
+        <span class="hide-mob">v<span id="version"></span></span>
+        <button class="tweaks-toggle mono" id="tweaks-open" aria-label="Abrir tweaks">Tweaks</button>
       </div>
-
-      <!-- API error -->
-      <div id="state-error" class="state">
-        <div class="state-icon">😓</div>
-        <h2 class="state-title">Ops...</h2>
-        <p class="state-text">Houve um erro ao carregar as disciplinas.<br>Tente novamente em instantes.</p>
-        <button class="btn-accent" onclick="window.location.reload()">Tentar novamente</button>
-      </div>
-
-      <!-- Inactive -->
-      <div id="state-inactive" class="state">
-        <div class="state-icon">📚</div>
-        <h2 class="state-title">Aguarde</h2>
-        <p class="state-text">Aguarde instruções do professor!<br>Esta aplicação ainda não foi ativada.</p>
-      </div>
-
-      <!-- Step 1: Shift -->
-      <div id="step-shift" class="state">
-        <div class="card-header">
-          <h1 class="card-title">Disciplinas</h1>
-          <p class="card-subtitle">Prof. Thiago G. Traue</p>
-        </div>
-        <div class="divider"></div>
-        <p class="step-label">Selecione o turno</p>
-        <div class="shift-grid">
-          <button class="btn-shift" data-shift="diurno">
-            <span class="shift-icon">☀️</span>
-            <span class="shift-name">Diurno</span>
-          </button>
-          <button class="btn-shift" data-shift="noturno">
-            <span class="shift-icon">🌙</span>
-            <span class="shift-name">Noturno</span>
-          </button>
-          <button class="btn-shift btn-shift--wide" data-shift="ead">
-            <span class="shift-icon">🖥️</span>
-            <span class="shift-name">EaD</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 2: Disciplines -->
-      <div id="step-disciplines" class="state">
-        <button id="btn-back" class="btn-back" aria-label="Voltar">← Voltar</button>
-        <p class="step-label">Selecione a disciplina</p>
-        <div id="discipline-list" class="discipline-list"></div>
-      </div>
-
     </div>
-  </main>
 
-  <footer class="footer">
-    <span>© <span id="year"></span> Prof. Traue · v.<span id="version"></span> · <a href="https://github.com/traue/git-index" target="_blank" rel="noopener noreferrer">GitHub</a></span>
-  </footer>
+    <div class="subbar">
+      <span>Prof. Thiago G. Traue</span>
+      <span class="sep">·</span>
+      <span>Repositórios de Ensino</span>
+      <span class="sep">·</span>
+      <span id="subbar-count">—</span>
+    </div>
 
-  <script type="text/javascript" src="js/script.js"></script>
+    <div id="app"></div>
+
+    <div class="colophon">
+      <span>© <span id="year"></span> · Prof. Thiago G. Traue</span>
+      <span>
+        <a href="https://github.com/traue/" class="link" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        &nbsp;·&nbsp;
+        <a href="https://api.traue.com.br/disciplinas/" class="link" target="_blank"
+          rel="noopener noreferrer">api.traue.com.br ↗</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="tweaks" id="tweaks">
+    <header>
+      <span>Tweaks</span>
+      <button id="tweaks-close" aria-label="Fechar">×</button>
+    </header>
+    <div class="group">
+      <label>Paleta</label>
+      <div class="swatches">
+        <div class="sw" data-p="paper">Paper</div>
+        <div class="sw" data-p="linen">Linen</div>
+        <div class="sw" data-p="midnight">Night</div>
+      </div>
+    </div>
+    <div class="group">
+      <label>Densidade</label>
+      <div class="opts" data-k="density">
+        <button data-v="compact">Compacto</button>
+        <button data-v="normal" class="on">Normal</button>
+        <button data-v="spacious">Espaçoso</button>
+      </div>
+    </div>
+    <div class="group">
+      <label>Layout da lista</label>
+      <div class="opts" data-k="layout">
+        <button data-v="list" class="on">Lista</button>
+        <button data-v="grid">Grade</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/script.js?v=4.0.0"></script>
 </body>
 
 </html>
