@@ -13,12 +13,14 @@ const STATE = {
   route: null,         // null | "diurno" | "noturno" | "ead"
   query: "",
   favs: new Set(JSON.parse(localStorage.getItem("gi_favs") || "[]")),
-  layout: TWEAKS.layout
+  layout: TWEAKS.layout,
+  semestre: null        // vem da API (payload.semestre); null = API antiga sem o campo
 };
 
 const app = document.getElementById("app");
 const subbarCount = document.getElementById("subbar-count");
 const statusChip = document.getElementById("status-chip");
+const semesterChip = document.getElementById("semester-chip");
 
 /* -------- Boot -------- */
 document.addEventListener("DOMContentLoaded", function () {
@@ -46,6 +48,10 @@ function loadAPI() {
       return res.json();
     })
     .then(payload => {
+      STATE.semestre = payload.semestre || null;
+      if (semesterChip) {
+        semesterChip.textContent = STATE.semestre ? ("Semestre " + STATE.semestre) : "Semestre —";
+      }
       if (!payload.active) {
         setStatus("off");
         renderInactive();
@@ -129,7 +135,7 @@ function renderHome() {
   app.innerHTML = `
     <section class="screen">
       <div class="hero">
-        <div class="eyebrow">Disciplinas · 26.1</div>
+        <div class="eyebrow">Disciplinas${STATE.semestre ? " · " + STATE.semestre : ""}</div>
         <h1 class="display">Selecione<br/>seu <em>turno</em>.</h1>
         <p class="lede">Repositórios de ensino do Prof. Thiago G. Traue — materiais, roteiros de aula e exercícios, organizados por disciplina.</p>
       </div>
@@ -179,7 +185,7 @@ function renderDisc(turno) {
 
       <div class="d-header">
         <h2 class="serif">Turno <em>${t.nome}</em></h2>
-        <div class="counts"><b>${list.length}</b> disciplinas · Semestre 26.1</div>
+        <div class="counts"><b>${list.length}</b> disciplinas${STATE.semestre ? " · Semestre " + STATE.semestre : ""}</div>
       </div>
 
       <div class="toolbar">
